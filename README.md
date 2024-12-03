@@ -5,7 +5,7 @@ Hello everyone, this is the FreeCodeCamp project submitted by me for the [*Demog
 Here are the instructions provided for the project:
 
 <details>
-<summary>Instructions</summary>
+<summary><strong>Instructions</strong></summary>
 In this challenge you must analyze demographic data using Pandas. You are given a dataset of demographic data that was extracted from the 1994 Census database. Here is a sample of what the data looks like:  
 
 ```
