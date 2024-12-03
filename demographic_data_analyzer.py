@@ -9,29 +9,40 @@ def calculate_demographic_data(print_data=True):
     ]).dropna()
 
     df = df[df['race'] != 'race']
-
     df['age'] = pd.to_numeric(df['age'], errors='coerce')
     df['hours-per-week'] = pd.to_numeric(df['hours-per-week'], errors='coerce')
 
+    # Q1
     race_count = df['race'].value_counts()
+
+    # Q2
     average_age_men = round(df[df['sex'] == 'Male']['age'].mean(), 1)
+
+    # Q3
     percentage_bachelors = round((df['education'] == 'Bachelors').mean() * 100, 1)
 
+    # Q4
     higher_education = df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])
     higher_education_rich = round((df[higher_education & (df['salary'] == '>50K')].shape[0] / higher_education.sum()) * 100, 1)
 
+    # Q5
     lower_education = ~df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])
     lower_education_rich = round((df[lower_education & (df['salary'] == '>50K')].shape[0] / lower_education.sum()) * 100, 1)
 
+    # Q6
     min_work_hours = df['hours-per-week'].min()
     num_min_workers = df[df['hours-per-week'] == min_work_hours]
+
+    # Q7
     rich_percentage = round((num_min_workers[num_min_workers['salary'] == '>50K'].shape[0] / num_min_workers.shape[0]) * 100, 1)
 
+    # Q8
     country_salary = df[df['salary'] == '>50K']['native-country'].value_counts()
     country_counts = df['native-country'].value_counts()
     highest_earning_country = (country_salary / country_counts).idxmax()
     highest_earning_country_percentage = round((country_salary / country_counts).max() * 100, 1)
 
+    # Q9
     top_IN_occupation = df[(df['native-country'] == 'India') & (df['salary'] == '>50K')]['occupation'].mode()[0]
 
     if print_data:
